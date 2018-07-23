@@ -33,9 +33,6 @@
                   <el-button slot="append" icon="el-icon-search"></el-button>
                 </el-input>
               </el-col>
-              <!--<el-col :span="8">-->
-                <!--<el-button type="primary" icon="el-icon-search">搜索</el-button>-->
-              <!--</el-col>-->
             </el-row>
           </el-col>
         </el-row>
@@ -46,7 +43,17 @@
 
 <script>
   export default {
-    name: "header"
+    name: "headerExtend",
+    data() {
+      return {
+        horizontal: '',
+        activeIndex: '1',
+        input5: ''
+      }
+    },
+    methods: {
+      handleSelect: ()=>{console.log(this.horizontal)}
+    }
   }
 </script>
 
