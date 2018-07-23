@@ -7,7 +7,7 @@
         <!--background-color="#42b983" text-color="#fff"-->
         <el-row :gutter="0" justify="space-between">
           <el-col :span="6">
-            <el-menu-item index="1" style="font-size: 30px">有梦想的人不睡觉</el-menu-item>
+            <el-menu-item index="1" style="font-size: 30px">HELLO WORD</el-menu-item>
           </el-col>
           <el-col :span="6">
             <el-submenu index="2">
