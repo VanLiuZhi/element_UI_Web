@@ -31,7 +31,7 @@
               <el-row justify="space-between">
                 <el-col :span="6">
                   <img style="height: 100%;width: 100%"
-                       src="https://vanliuzhi-object-storage.oss-cn-zhangjiakou.aliyuncs.com/2016411523810606.jpg?Expires=1532363044&OSSAccessKeyId=TMP.AQHsncAt-luwttwlRYjMZ1DaMeGgvQn7ScyDx-tWqaOytVYd-HhQAXBx_LuYAAAwLAIUH8rgiNQoUn78wmwLtCXryDTUozcCFC9KsmVGmJNNIEbObT5fX7yU51iw&Signature=eHF2Xppj8FfgsEOPBiouJOoYpTU%3D">
+                       :src="img_url">
                 </el-col>
                 <el-col :span="18">
                   <el-col :span="24">2018年7月23日</el-col>
@@ -65,50 +65,15 @@
 
 <script>
   import HeaderExtend from '~/component/HeaderExtend'
-
+  const img_url = '/src/assets/img/generally.jpg'
   export default {
     name: "index",
     components: {'HeaderExtend': HeaderExtend},
     data() {
       return {
-        richtext: "<p>文章测试</p>\n" +
-        "<pre class=\"language-python\"><code>def get_you_money():\n" +
-        "    return 1000</code></pre>\n" +
-        "<p><span style=\"background-color: #00ff00;\"><strong>今天也是充满希望的一天</strong></span></p>\n" +
-        "<p>&nbsp;</p>\n" +
-        "<table style=\"border-collapse: collapse; width: 100%;\" border=\"1\">\n" +
-        "<tbody>\n" +
-        "<tr>\n" +
-        "<td style=\"width: 20%;\">1</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "</tr>\n" +
-        "<tr>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "</tr>\n" +
-        "<tr>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "</tr>\n" +
-        "<tr>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "<td style=\"width: 20%;\">&nbsp;</td>\n" +
-        "</tr>\n" +
-        "</tbody>\n" +
-        "</table>",
-        loop_test: [1, 2, 3, 4, 5]
+        richtext: '',
+        loop_test: [1, 2, 3, 4, 5],
+        img_url: img_url
       }
     }
   }
