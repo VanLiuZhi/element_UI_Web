@@ -24,7 +24,7 @@
             </el-submenu>
           </el-col>
           <el-col :span="6">
-            <el-menu-item index="3" disabled>消息中心</el-menu-item>
+            <el-menu-item index="3" disabled><router-link tag="span" to="/article_details/2">word页面</router-link></el-menu-item>
           </el-col>
           <el-col :span="6">
             <el-row justify="space-between">
