@@ -45,17 +45,8 @@
   export default {
     name: "ArticleDetails",
     components: {'HeaderExtend': HeaderExtend},
-    // props: {
-    //   content: {
-    //     type: 'String',
-    //     required: true
-    //   }
-    // },
     methods: {
-      positioningToDom(v){
-        console.log(v)
-        v.target.scrollIntoView()
-      }
+
     },
     created() {
       this.content = this.$route.params.data.data.content

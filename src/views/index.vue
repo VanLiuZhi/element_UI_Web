@@ -3,17 +3,22 @@
 <template>
   <div>
     <header-extend></header-extend>
-    <el-container style="margin: 0 200px">
+    <el-container style="margin-left: auto;margin-right: auto; width: 1100px">
       <el-main>
-        <img src="https://vanliuzhi-object-storage.oss-cn-zhangjiakou.aliyuncs.com/2016411523810606.jpg?x-oss-process=image/resize,w_100"/>
-        <el-row :gutter="20" justify="space-between">
+
+        <!--index上部分-->
+
+        <el-row :gutter="20" justify="space-between" style="padding: 10px">
           <el-col :span="16">
             <div class="block" style="background-color: white">
               <!--<span class="demonstration">默认 Hover 指示器触发</span>-->
-              <el-carousel height="150px">
-                <!--<el-carousel-item v-for="item in 4" :key="item">-->
-                <!--<h3>{{ item }}</h3>-->
-                <!--</el-carousel-item>-->
+              <el-carousel height="330px">
+                <el-carousel-item>
+                <img src="/src/assets/img/banner_1.jpg"/>
+                </el-carousel-item>
+                <el-carousel-item>
+                  <img src="/src/assets/img/banner_2.jpg"/>
+                </el-carousel-item>
               </el-carousel>
             </div>
           </el-col>
@@ -25,6 +30,9 @@
             </el-card>
           </el-col>
         </el-row>
+
+        <!--index下部分-->
+
         <el-container>
           <!--TODO 考虑只用row 不用 main-->
           <el-main style="padding: 10px">
@@ -32,17 +40,19 @@
           </el-main>
           <el-aside style="padding: 10px">
             <el-card class="box-card">
-              <!--<div v-for="o in 4" :key="o" class="text item">-->
-              <!--{{'列表内容 ' + o }}-->
-              <!--</div>-->
+              <div v-for="o in 4" :key="o" class="text item">
+              {{'列表内容 ' + o }}
+              </div>
             </el-card>
           </el-aside>
         </el-container>
 
       </el-main>
+
       <!--<el-aside width="200px">-->
       <!--lll-->
       <!--</el-aside>-->
+      
     </el-container>
     <!--分页-->
     <div class="pagination-container">
