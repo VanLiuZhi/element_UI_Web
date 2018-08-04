@@ -3,18 +3,16 @@
 <template>
   <div>
     <header-extend></header-extend>
-    <el-container style="margin-left: auto;margin-right: auto; width: 1100px">
+    <el-container class="container_class">
       <el-main>
-
         <!--index上部分-->
-
-        <el-row :gutter="20" justify="space-between" style="padding: 10px">
-          <el-col :span="16">
+        <el-row justify="space-between" style="padding: 10px">
+          <el-col :span="24">
             <div class="block" style="background-color: white">
               <!--<span class="demonstration">默认 Hover 指示器触发</span>-->
               <el-carousel height="330px">
                 <el-carousel-item>
-                <img src="/src/assets/img/banner_1.jpg"/>
+                  <img src="/src/assets/img/banner_1.jpg"/>
                 </el-carousel-item>
                 <el-carousel-item>
                   <img src="/src/assets/img/banner_2.jpg"/>
@@ -22,38 +20,25 @@
               </el-carousel>
             </div>
           </el-col>
-          <el-col :span="8">
-            <el-card class="box-card">
-              <!--<div v-for="o in 4" :key="o" class="text item">-->
-              <!--{{'列表内容 ' + o }}-->
-              <!--</div>-->
-            </el-card>
-          </el-col>
         </el-row>
-
         <!--index下部分-->
-
         <el-container>
-          <!--TODO 考虑只用row 不用 main-->
           <el-main style="padding: 10px">
             <article-card :data="list" v-loading="listLoading"></article-card>
           </el-main>
-          <el-aside style="padding: 10px">
-            <el-card class="box-card">
-              <div v-for="o in 4" :key="o" class="text item">
-              {{'列表内容 ' + o }}
-              </div>
-            </el-card>
-          </el-aside>
         </el-container>
-
       </el-main>
-
-      <!--<el-aside width="200px">-->
-      <!--lll-->
-      <!--</el-aside>-->
-      
+      <!--侧边栏-->
+      <el-aside style="padding: 30px 0">
+        <el-card class="box-card">
+          <div v-for="o in 10" :key="o" class="text item">
+            {{'列表内容 ' + o }}
+          </div>
+        </el-card>
+      </el-aside>
+      <!--end侧边栏-->
     </el-container>
+
     <!--分页-->
     <div class="pagination-container">
       <el-pagination background @size-change="handleSizeChange" @current-change="handleCurrentChange"
@@ -71,7 +56,7 @@
 <script>
   import HeaderExtend from '@/component/HeaderExtend'
   import ArticleCard from '@/component/ArticleCard'
-  import { listArticle } from '@/api/index'
+  import {listArticle} from '@/api/index'
 
   const img_url = '/src/assets/img/generally.jpg'
 
@@ -128,6 +113,12 @@
 </script>
 
 <style scoped>
+  .container_class {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1100px;
+  }
+
   .footer_class {
     /*position: fixed;*/
     /*border: 0;*/

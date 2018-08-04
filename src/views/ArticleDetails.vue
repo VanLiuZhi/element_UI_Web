@@ -5,12 +5,18 @@
     <header-extend></header-extend>
     <el-container style="margin-left: auto;margin-right: auto; width: 1100px">
       <el-main>
-        <el-row justify="start" style="margin: 5px">
-          <el-col :span="4">
-            <el-button type="primary" onclick="javascript:history.back()">返回</el-button>
-          </el-col>
-          <!--<el-col :span="3"><el-button type="primary">返回</el-button></el-col>-->
-        </el-row>
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
+          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
+          <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+        </el-breadcrumb>
+        <!--<el-row justify="start" style="margin: 5px">-->
+          <!--<el-col :span="4">-->
+            <!--<el-button type="primary" onclick="javascript:history.back()">返回</el-button>-->
+          <!--</el-col>-->
+          <!--&lt;!&ndash;<el-col :span="3"><el-button type="primary">返回</el-button></el-col>&ndash;&gt;-->
+        <!--</el-row>-->
         <el-card style="text-align: left;padding: 50px" class="rich_content_class" v-html="content">
 
         </el-card>

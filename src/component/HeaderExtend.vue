@@ -5,7 +5,7 @@
     <el-header class="heard">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <!--background-color="#42b983" text-color="#fff"-->
-        <el-row :gutter="0" justify="space-between">
+        <el-row :gutter="0" justify="space-between" style="padding: 5px 20px">
           <el-col :span="6">
             <el-menu-item index="1" style="font-size: 30px">HELLO WORD</el-menu-item>
           </el-col>
@@ -59,6 +59,7 @@
 
 <style scoped>
   .heard {
+    /*padding: 5px 20px;*/
     padding: 0;
   }
 </style>
