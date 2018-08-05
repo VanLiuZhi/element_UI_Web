@@ -12,10 +12,10 @@
           <el-breadcrumb-item>活动详情</el-breadcrumb-item>
         </el-breadcrumb>
         <!--<el-row justify="start" style="margin: 5px">-->
-          <!--<el-col :span="4">-->
-            <!--<el-button type="primary" onclick="javascript:history.back()">返回</el-button>-->
-          <!--</el-col>-->
-          <!--&lt;!&ndash;<el-col :span="3"><el-button type="primary">返回</el-button></el-col>&ndash;&gt;-->
+        <!--<el-col :span="4">-->
+        <!--<el-button type="primary" onclick="javascript:history.back()">返回</el-button>-->
+        <!--</el-col>-->
+        <!--&lt;!&ndash;<el-col :span="3"><el-button type="primary">返回</el-button></el-col>&ndash;&gt;-->
         <!--</el-row>-->
         <el-card style="text-align: left;padding: 50px" class="rich_content_class" v-html="content">
 
@@ -25,21 +25,6 @@
         <div class="rich_text_class" style="position:fixed;" v-html="menu">
 
         </div>
-        <ol class="rich_text_class">
-          <!--<li>I have never seen anything like this</li>-->
-          <!--<li>This is most certainly cool, and it can also work on long texts inside the list-item elements, which spans over multiple lines</li>-->
-          <!--<li>Un-ordered lists are fun to play with.</li>-->
-          <!--<li>Firefox sure does animate this effect nicely.</li>-->
-          <!--<li>This is so simple-->
-          <!--<ol>-->
-          <!--<li>I have never seen anything like this</li>-->
-          <!--<li>This is most certainly cool, and it can also work on long texts inside the list-item elements, which spans over multiple lines</li>-->
-          <!--<li>Un-ordered lists are fun to play with.</li>-->
-          <!--<li>Firefox sure does animate this effect nicely.</li>-->
-          <!--<li>This is so simple</li>-->
-          <!--</ol>-->
-          <!--</li>-->
-        </ol>
       </el-aside>
     </el-container>
   </div>
@@ -52,11 +37,29 @@
     name: "ArticleDetails",
     components: {'HeaderExtend': HeaderExtend},
     methods: {
+      CodeSyntaxHighlighter() {
+        // todo 当前代码高亮思路使用第三方插件，引入对于文件，在页面DOM渲染完成后对pre标签增加样式，调用高亮方法
+        SyntaxHighlighter.defaults['auto-links'] = false; //是否可以添加自动连接  默认连接可以点击 默认为true
+        SyntaxHighlighter.defaults['collapse'] = false; //默认高亮代码是否折叠 true为折叠 false为不折叠
+        SyntaxHighlighter.defaults['html-script'] = false; //是否开启html的混合形式 默认为false 为关闭
+        SyntaxHighlighter.defaults['toolbar']=true; //黄绿色版权问号的显示和隐藏 默认为true 为显示
 
+        let blocks = document.querySelectorAll("pre");
+        console.log(blocks);
+        blocks.forEach(value => {
+          console.log(value);
+          value.className += ' brush: js;';
+        });
+        // document.getElementsByTagName('pre')[1].
+        SyntaxHighlighter.highlight();
+      }
     },
     created() {
       this.content = this.$route.params.data.data.content
       this.menu = this.$route.params.data.data.menu
+      this.$nextTick(function () {
+        this.CodeSyntaxHighlighter()
+      });
     },
     data() {
       return {

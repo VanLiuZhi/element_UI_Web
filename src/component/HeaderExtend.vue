@@ -2,12 +2,11 @@
 <!--@Auther: VanLiuZhi -->
 <template>
   <div>
-    <el-header class="heard">
       <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
         <!--background-color="#42b983" text-color="#fff"-->
         <el-row :gutter="0" justify="space-between" style="padding: 5px 20px">
           <el-col :span="6">
-            <el-menu-item index="1" style="font-size: 30px">HELLO WORD</el-menu-item>
+            <el-menu-item index="1" style="font-size: 30px">你尽力了，才有资格说自己的运气不好。</el-menu-item>
           </el-col>
           <el-col :span="6">
             <el-submenu index="2">
@@ -37,7 +36,6 @@
           </el-col>
         </el-row>
       </el-menu>
-    </el-header>
   </div>
 </template>
 
