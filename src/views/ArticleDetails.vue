@@ -22,8 +22,13 @@
         </el-card>
       </el-main>
       <el-aside style="position: relative;">
-        <div class="rich_text_class" style="position:fixed;" v-html="menu">
+        <!--<div class="rich_text_class" style="position:fixed;" v-html="menu">-->
 
+        <!--</div>-->
+        <div v-highlight>
+          <pre>
+            <code v-html="test_html"></code>
+          </pre>
         </div>
       </el-aside>
     </el-container>
@@ -32,7 +37,12 @@
 
 <script>
   import HeaderExtend from '@/component/HeaderExtend'
-
+  import 'highlight.js/styles/googlecode.css'
+  import hljs from 'highlight.js'
+  hljs.highlightCode =   function () { //自定义highlightCode方法，将只执行一次的逻辑去掉
+    let blocks = document.querySelectorAll('pre code');
+    [].forEach.call(blocks, hljs.highlightBlock);
+  };
   export default {
     name: "ArticleDetails",
     components: {'HeaderExtend': HeaderExtend},
@@ -52,19 +62,51 @@
         });
         // document.getElementsByTagName('pre')[1].
         SyntaxHighlighter.highlight();
+      },
+      Codehighlight() {
+        // hljs.highlightCode()
       }
     },
     created() {
       this.content = this.$route.params.data.data.content
       this.menu = this.$route.params.data.data.menu
       this.$nextTick(function () {
-        this.CodeSyntaxHighlighter()
+        // this.CodeSyntaxHighlighter()
+        this.Codehighlight()
       });
     },
     data() {
       return {
         content: '',
-        menu: ''
+        menu: '',
+        test_html: "@csrf_protect.exempt\n" +
+        "@blueprint.route('/param_query/<terminal_code>', methods=['GET', 'POST'])\n" +
+        "# @per_required\n" +
+        "def param_query(terminal_code):\n" +
+        "    \"\"\"\n" +
+        "    一键查询所有参数\n" +
+        "    :param terminal_id:\n" +
+        "    :return:\n" +
+        "    \"\"\"\n" +
+        "    terminal = TerminalInfo.query.filter(TerminalInfo.terminal_code == terminal_code).first()\n" +
+        "    if terminal:\n" +
+        "        terminal_area = terminal.terminal_area\n" +
+        "        query_AFN = SysDict.query.filter(SysDict.dict_type == 'query_message').all()\n" +
+        "        data = []\n" +
+        "        for item in query_AFN:\n" +
+        "            dic = {}\n" +
+        "            dic.update({'rtu_AFN': item.dict_id})\n" +
+        "            dic.update({'terminal_area': terminal_area})\n" +
+        "            dic.update({'terminal_code': terminal_code})\n" +
+        "            json.dumps(dic)\n" +
+        "            data.append(dic)\n" +
+        "        revc_data = socket_query_param(data)\n" +
+        "        if revc_data == '00':\n" +
+        "            return json.dumps({'desc': '查询中请稍等', 'code': ResponseCode.SUCCESS})\n" +
+        "        else:\n" +
+        "            return json.dumps({'desc': '报文发送失败', 'code': ResponseCode.ERROR})\n" +
+        "    else:\n" +
+        "        return None"
       }
     }
   }
