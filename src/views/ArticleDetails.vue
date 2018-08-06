@@ -32,8 +32,11 @@
     components: {'HeaderExtend': HeaderExtend},
     methods: {},
     created() {
-      this.content = this.$route.params.data.data.content
-      this.menu = this.$route.params.data.data.menu
+      let routeData = this.$route.params.data
+      if (routeData){
+        this.content = this.$route.params.data.data.content
+        this.menu = this.$route.params.data.data.menu
+      }
       this.$nextTick(function () {
 
       });
