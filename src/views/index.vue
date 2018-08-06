@@ -31,9 +31,7 @@
       <!--侧边栏-->
       <el-aside style="padding: 30px 0">
         <el-card class="box-card">
-          <div v-for="o in 10" :key="o" class="text item">
-            {{'列表内容 ' + o }}
-          </div>
+          <article-classify></article-classify>
         </el-card>
       </el-aside>
       <!--end侧边栏-->
@@ -56,13 +54,14 @@
 <script>
   import HeaderExtend from '@/component/HeaderExtend'
   import ArticleCard from '@/component/ArticleCard'
+  import ArticleClassify from '@/component/ArticleClassify'
   import {listArticle} from '@/api/index'
 
   const img_url = '/src/assets/img/generally.jpg'
 
   export default {
     name: "index",
-    components: {'HeaderExtend': HeaderExtend, 'ArticleCard': ArticleCard},
+    components: {ArticleClassify, HeaderExtend, ArticleCard},
     data() {
       return {
         richtext: '',
@@ -88,9 +87,7 @@
           const res = response.data
           this.list = res.data.item
           this.total = res.data.total
-          setTimeout(() => {
-            this.listLoading = false
-          }, 1.5 * 1000)
+          this.listLoading = false
         })
       },
       handleFilter() {
