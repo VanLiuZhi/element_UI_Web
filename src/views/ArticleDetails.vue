@@ -11,24 +11,13 @@
           <el-breadcrumb-item>活动列表</el-breadcrumb-item>
           <el-breadcrumb-item>活动详情</el-breadcrumb-item>
         </el-breadcrumb>
-        <!--<el-row justify="start" style="margin: 5px">-->
-        <!--<el-col :span="4">-->
-        <!--<el-button type="primary" onclick="javascript:history.back()">返回</el-button>-->
-        <!--</el-col>-->
-        <!--&lt;!&ndash;<el-col :span="3"><el-button type="primary">返回</el-button></el-col>&ndash;&gt;-->
-        <!--</el-row>-->
-        <el-card style="text-align: left;padding: 50px" class="rich_content_class" v-html="content">
-
+        <el-card style="text-align: left;padding: 50px" class="rich_content_class">
+          <div v-html="content" v-highlight>
+          </div>
         </el-card>
       </el-main>
       <el-aside style="position: relative;">
-        <!--<div class="rich_text_class" style="position:fixed;" v-html="menu">-->
-
-        <!--</div>-->
-        <div v-highlight>
-          <pre>
-            <code v-html="test_html"></code>
-          </pre>
+        <div class="rich_text_class" style="position:fixed;" v-html="menu">
         </div>
       </el-aside>
     </el-container>
@@ -37,76 +26,22 @@
 
 <script>
   import HeaderExtend from '@/component/HeaderExtend'
-  import 'highlight.js/styles/googlecode.css'
-  import hljs from 'highlight.js'
-  hljs.highlightCode =   function () { //自定义highlightCode方法，将只执行一次的逻辑去掉
-    let blocks = document.querySelectorAll('pre code');
-    [].forEach.call(blocks, hljs.highlightBlock);
-  };
+
   export default {
     name: "ArticleDetails",
     components: {'HeaderExtend': HeaderExtend},
-    methods: {
-      CodeSyntaxHighlighter() {
-        // todo 当前代码高亮思路使用第三方插件，引入对于文件，在页面DOM渲染完成后对pre标签增加样式，调用高亮方法
-        SyntaxHighlighter.defaults['auto-links'] = false; //是否可以添加自动连接  默认连接可以点击 默认为true
-        SyntaxHighlighter.defaults['collapse'] = false; //默认高亮代码是否折叠 true为折叠 false为不折叠
-        SyntaxHighlighter.defaults['html-script'] = false; //是否开启html的混合形式 默认为false 为关闭
-        SyntaxHighlighter.defaults['toolbar']=true; //黄绿色版权问号的显示和隐藏 默认为true 为显示
-
-        let blocks = document.querySelectorAll("pre");
-        console.log(blocks);
-        blocks.forEach(value => {
-          console.log(value);
-          value.className += ' brush: js;';
-        });
-        // document.getElementsByTagName('pre')[1].
-        SyntaxHighlighter.highlight();
-      },
-      Codehighlight() {
-        // hljs.highlightCode()
-      }
-    },
+    methods: {},
     created() {
       this.content = this.$route.params.data.data.content
       this.menu = this.$route.params.data.data.menu
       this.$nextTick(function () {
-        // this.CodeSyntaxHighlighter()
-        this.Codehighlight()
+
       });
     },
     data() {
       return {
         content: '',
         menu: '',
-        test_html: "@csrf_protect.exempt\n" +
-        "@blueprint.route('/param_query/<terminal_code>', methods=['GET', 'POST'])\n" +
-        "# @per_required\n" +
-        "def param_query(terminal_code):\n" +
-        "    \"\"\"\n" +
-        "    一键查询所有参数\n" +
-        "    :param terminal_id:\n" +
-        "    :return:\n" +
-        "    \"\"\"\n" +
-        "    terminal = TerminalInfo.query.filter(TerminalInfo.terminal_code == terminal_code).first()\n" +
-        "    if terminal:\n" +
-        "        terminal_area = terminal.terminal_area\n" +
-        "        query_AFN = SysDict.query.filter(SysDict.dict_type == 'query_message').all()\n" +
-        "        data = []\n" +
-        "        for item in query_AFN:\n" +
-        "            dic = {}\n" +
-        "            dic.update({'rtu_AFN': item.dict_id})\n" +
-        "            dic.update({'terminal_area': terminal_area})\n" +
-        "            dic.update({'terminal_code': terminal_code})\n" +
-        "            json.dumps(dic)\n" +
-        "            data.append(dic)\n" +
-        "        revc_data = socket_query_param(data)\n" +
-        "        if revc_data == '00':\n" +
-        "            return json.dumps({'desc': '查询中请稍等', 'code': ResponseCode.SUCCESS})\n" +
-        "        else:\n" +
-        "            return json.dumps({'desc': '报文发送失败', 'code': ResponseCode.ERROR})\n" +
-        "    else:\n" +
-        "        return None"
       }
     }
   }
