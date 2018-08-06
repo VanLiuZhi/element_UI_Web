@@ -11,9 +11,7 @@
           <el-breadcrumb-item>活动列表</el-breadcrumb-item>
           <el-breadcrumb-item>活动详情</el-breadcrumb-item>
         </el-breadcrumb>
-        <el-card style="text-align: left;padding: 50px" class="rich_content_class">
-          <div v-html="content" v-highlight>
-          </div>
+        <el-card style="text-align: left;padding: 50px" class="rich_content_class" v-html="content" v-highlight>
         </el-card>
       </el-main>
       <el-aside style="position: relative;">
@@ -26,19 +24,30 @@
 
 <script>
   import HeaderExtend from '@/component/HeaderExtend'
+  import {getArticleForGUID} from '@/api/index'
 
   export default {
     name: "ArticleDetails",
     components: {'HeaderExtend': HeaderExtend},
-    methods: {},
+    methods: {
+      cardClick(guid) {
+        getArticleForGUID({GUID: guid}).then(response => {
+          let routeData = response.data
+          this.content = routeData.data.content
+          this.menu = routeData.data.menu
+        })
+      }
+    },
     created() {
       let routeData = this.$route.params.data
-      if (routeData){
+      if (routeData) {
         this.content = this.$route.params.data.data.content
         this.menu = this.$route.params.data.data.menu
       }
+      else {
+        this.cardClick(this.$route.params.guid)
+      }
       this.$nextTick(function () {
-
       });
     },
     data() {

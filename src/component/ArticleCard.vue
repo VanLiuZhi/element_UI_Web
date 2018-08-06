@@ -28,19 +28,14 @@
     props: ['data'],
     methods: {
       cardClick(guid) {
-        console.log(guid)
         getArticleForGUID({GUID:guid}).then(response => {
-          console.log(response)
           this.$router.push({
             name: 'ArticleDetails',
             params: {
-              guid: 1,
+              guid: guid,
               data: response.data
             }
           })
-          // this.$router.push({
-          //   path: `/article_details/${response.data.id}`,
-          // })
         })
       }
     }
