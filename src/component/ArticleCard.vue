@@ -9,7 +9,7 @@
                :src="item.cover || default_image">
         </el-col>
         <el-col :span="18" style="padding: 0 10px">
-          <el-col :span="24"><span>{{item.date}}</span></el-col>
+          <el-col :span="24"><span><svg-icon icon-class="articleClassify" />{{item.date}}</span></el-col>
           <el-col :span="24">{{item.title}}</el-col>
           <el-col :span="24" style="text-align: left">
             <p style="-webkit-box-orient: vertical;" class="span_class abstract_c">{{item.abstract}}</p>

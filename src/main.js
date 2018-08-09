@@ -4,6 +4,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import App from './App.vue'
 import router from './router'
 
+// 全局注册icons图标
+import './icons'
+
 // 注册highlight指令
 import 'highlight.js/styles/androidstudio.css'
 import './assets/js/hightlight.js'
