@@ -6,13 +6,13 @@
       <el-row justify="space-between">
         <el-col :span="6">
           <img style="height: 100%;width: 100%"
-               :src="item.cover">
+               :src="item.cover || default_image">
         </el-col>
-        <el-col :span="18">
-          <el-col :span="24"><span>2018年7月23日</span></el-col>
-          <el-col :span="24">python多线程编程</el-col>
-          <el-col :span="24">
-            <p style="-webkit-box-orient: vertical;" class="span_class abstract_c">今天也是充满希望的一天，有梦想的人不睡觉，到达星辰的彼岸,今天也是充满希望的一天，有梦想的人不睡觉，到达星辰的彼岸,今天也是充满希望的一天，有梦想的人不睡觉，到达星辰的彼岸,今天也是充满希望的一天，有梦想的人不睡觉，到达星辰的彼岸</p>
+        <el-col :span="18" style="padding: 0 10px">
+          <el-col :span="24"><span>{{item.date}}</span></el-col>
+          <el-col :span="24">{{item.title}}</el-col>
+          <el-col :span="24" style="text-align: left">
+            <p style="-webkit-box-orient: vertical;" class="span_class abstract_c">{{item.abstract}}</p>
           </el-col>
         </el-col>
       </el-row>
@@ -23,9 +23,15 @@
 <script>
   import {formatDate} from "../utils/dateFormat"
   import { getArticleForGUID } from '@/api/index'
+  const img_url = '/src/assets/img/generally.jpg'
   export default {
     name: "ArticleCard",
     props: ['data'],
+    data() {
+      return {
+        default_image: img_url
+      }
+    },
     methods: {
       cardClick(guid) {
         getArticleForGUID({GUID:guid}).then(response => {
