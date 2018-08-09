@@ -1,8 +1,17 @@
 const resolve = require('path').resolve
+const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const url = require('url')
 const publicPath = ''
+
+const assetsPath = function (_path) {
+  // const assetsSubDirectory = process.env.NODE_ENV === 'production'
+  //   ? config.build.assetsSubDirectory
+  //   : config.dev.assetsSubDirectory
+  let assetsSubDirectory = 'static' // 都统一在一个目录下
+  return path.posix.join(assetsSubDirectory, _path)
+}
 
 module.exports = (options = {}) => ({
   entry: {
@@ -30,7 +39,26 @@ module.exports = (options = {}) => ({
         use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
-        test: /\.(png|jpg|jpeg|gif|eot|ttf|woff|woff2|svg|svgz)(\?.+)?$/,
+        test: /\.svg$/,
+        loader: 'svg-sprite-loader',
+        include: [resolve('src/icons')],
+        options: {
+          symbolId: 'icon-[name]'
+        }
+      },
+      // 修改原配置，把png|jpe?g|gif|svg的处理抽离出来
+      {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        loader: 'url-loader',
+        exclude: [resolve('src/icons')],
+        options: {
+          limit: 10000,
+          name: assetsPath('img/[name].[hash:7].[ext]')
+        }
+      },
+      // 原配置
+      {
+        test: /\.(eot|ttf|woff|woff2|svgz)(\?.+)?$/,
         use: [{
           loader: 'url-loader',
           options: {
