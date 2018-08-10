@@ -8,18 +8,24 @@
         <!--index上部分-->
         <el-row justify="space-between" style="padding: 10px">
           <el-col :span="24">
-            <div class="block" style="background-color: white">
-              <!--<span class="demonstration">默认 Hover 指示器触发</span>-->
-              <el-carousel height="330px">
-                <el-carousel-item>
-                  <img src="/src/assets/img/banner_1.jpg"/>
-                </el-carousel-item>
-                <el-carousel-item>
-                  <img src="/src/assets/img/banner_2.jpg"/>
-                </el-carousel-item>
-              </el-carousel>
-            </div>
+            <!--<div class="block" style="background-color: white">-->
+              <!--&lt;!&ndash;<span class="demonstration">默认 Hover 指示器触发</span>&ndash;&gt;-->
+              <!--<el-carousel height="330px">-->
+                <!--<el-carousel-item>-->
+                  <!--<img src="/src/assets/img/banner_1.jpg"/>-->
+                <!--</el-carousel-item>-->
+                <!--<el-carousel-item>-->
+                  <!--<img src="/src/assets/img/banner_2.jpg"/>-->
+                <!--</el-carousel-item>-->
+              <!--</el-carousel>-->
+            <!--</div>-->
+            <iframe frameborder="0" src="/src/assets/html/apple_watch.html" width="100%" height="300px" scrolling="no"></iframe>
+
           </el-col>
+        </el-row>
+        <el-row justify="start">
+          <el-col :span="8">时间排序</el-col>
+          <el-col :span="8">热度排序</el-col>
         </el-row>
         <!--index下部分-->
         <el-container>
@@ -46,7 +52,7 @@
     </div>
     <!--分页结束-->
     <el-footer class="footer_class">
-      in footer
+      1441765847@qq.com vanliuzhi
     </el-footer>
   </div>
 </template>
@@ -57,6 +63,8 @@
   import ArticleClassify from '@/component/ArticleClassify'
   import {listArticle} from '@/api/index'
 
+  // import '@/assets/css/apple_clock.css'
+  // import '@/assets/js/apple_clock.js'
   const img_url = '/src/assets/img/generally.jpg'
 
   export default {

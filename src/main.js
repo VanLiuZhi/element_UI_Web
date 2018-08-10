@@ -8,7 +8,7 @@ import router from './router'
 import './icons'
 
 // 注册highlight指令
-import 'highlight.js/styles/androidstudio.css'
+import 'highlight.js/styles/agate.css'
 import './assets/js/hightlight.js'
 // css 的文件有好多个，更换可以采用不同的样式
 
