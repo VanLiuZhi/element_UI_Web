@@ -24,8 +24,8 @@
           </el-col>
         </el-row>
         <el-row justify="start">
-          <el-col :span="8">时间排序</el-col>
-          <el-col :span="8">热度排序</el-col>
+          <el-col :span="8"><div class="sort_div_class" @click="sortHandler('-date')"><svg-icon className="svg_class" icon-class="time" /><span v-bind:class="[(listQuery.orderby === '-date') ? 'active' : '']">时间排序</span></div></el-col>
+          <el-col :span="8"><div class="sort_div_class" @click="sortHandler('-times')"><svg-icon className="svg_class" icon-class="heat2" /><span v-bind:class="[(listQuery.orderby === '-times') ? 'active' : '']">热度排序</span></div></el-col>
         </el-row>
         <!--index下部分-->
         <el-container>
@@ -52,7 +52,7 @@
     </div>
     <!--分页结束-->
     <el-footer class="footer_class">
-      1441765847@qq.com vanliuzhi
+      <span style="line-height: 80px">1441765847@qq.com  vanliuzhi 2018</span>
     </el-footer>
   </div>
 </template>
@@ -83,11 +83,16 @@
           importance: undefined,
           title: undefined,
           type: undefined,
-          sort: '+id'
+          orderby: '-date'
         },
       }
     },
     methods: {
+      // 排序
+      sortHandler(value) {
+        this.listQuery.orderby = value
+        this.getList()
+      },
       // 获取首页数据，做分页处理
       getList() {
         this.listLoading = true
@@ -118,12 +123,28 @@
 </script>
 
 <style scoped>
+  .sort_div_class {
+    text-decoration: none;
+    cursor: pointer;
+    color: #868e96;
+    font-weight: 800;
+    font-size: 15px;
+  }
+  .sort_div_class:hover{
+    color: red;
+  }
+  .svg_class {
+    margin: 0 5px;
+  }
   .container_class {
     margin-left: auto;
     margin-right: auto;
     width: 1100px;
   }
-
+  .active {
+    color: #212529;
+    border-bottom: 2px solid #646464;
+  }
   .footer_class {
     /*position: fixed;*/
     /*border: 0;*/
