@@ -22,3 +22,19 @@ export function getArticleForGUID(params) {
     data: params
   })
 }
+
+export function getTopLevelArticleClassify(params) {
+  return base({
+    url: getUrl('getTopLevelArticleClassify'),
+    method: 'post',
+    data: params
+  })
+}
+
+export function getArticleClassifyForGUID(params) {
+  return base({
+    url: getUrl('getArticleClassifyForGUID'),
+    method: 'post',
+    data: params
+  })
+}
