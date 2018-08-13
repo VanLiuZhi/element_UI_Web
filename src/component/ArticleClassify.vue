@@ -4,26 +4,20 @@
   <div>
     <!--<el-input placeholder="输入关键字进行过滤" v-model="filterText">-->
     <!--</el-input>-->
-
     <!--<el-tree class="filter-tree" :props="defaultProps" :filter-node-method="filterNode" ref="tree2">-->
     <!--</el-tree>-->
     <el-tree :props="props" :load="loadNode" :highlight-current=highlight_current lazy @check-change="handleCheckChange"
-             @node-click="handleNodeClick">
+             @node-click="handleNodeClick" :expand-on-click-node="false">
       <div slot-scope="{ node, data }" class="custom-tree-node">
         <el-row style="width: 100%;flex-wrap: nowrap">
-          <el-col :span="20" style="text-align: left">
-            <span>{{ node.label }}{{ node.level }}
+          <el-col :span="24" style="text-align: left">
+            <span class="classify_class">{{ node.label }}({{ data.return_all_children_count }})
             </span>
+            <span v-on:click="$emit('click_event', data.guid)"><svg-icon :icon-class="(node.id === selectKey)?'eye_select':'eye'" /></span>
           </el-col>
-          <el-col :span="4">
-            <el-button type="success" size="mini" class="classify_class">{{ data.return_all_children_count }}</el-button>
-            <!--<template v-if="node.level == 2">-->
-            <!--<el-button type="success" size="mini" class="classify_class" :class="[(node.level === 2) ? 'classify_class_level_one' : '']">{{ data.return_all_children_count }}</el-button>-->
-            <!--</template>-->
-            <!--<template v-if="node.level == 3">-->
-              <!--<el-button type="success" size="mini" class="classify_class" :class="[(node.level === 3) ? 'classify_class_level_two' : '']">{{ data.return_all_children_count }}</el-button>-->
-            <!--</template>-->
-          </el-col>
+          <!--<el-col :span="4">-->
+            <!--<el-button type="success" size="mini" class="classify_class">{{ data.return_all_children_count }}</el-button>-->
+          <!--</el-col>-->
         </el-row>
       </div>
     </el-tree>
@@ -45,10 +39,13 @@
         props: {
           // 组件设置了props，值指向数据，也就是这里。
           label: 'name',
-          children: 'zones'
+          // children: 'zones',
+          isLeaf: 'isLeaf',
+          key: 'guid'
         },
         highlight_current: true,
-        tree_data: []
+        tree_data: [],
+        selectKey: ''
       };
     },
     methods: {
@@ -61,6 +58,7 @@
       },
       // 获取子分类
       getChildrenList(node) {
+        // console.log(node)
         return getArticleClassifyForGUID({parent: node.data.guid}).then(response => {
           this.tree_data = response.data.data.items
           return response
@@ -73,8 +71,11 @@
       handleCheckChange(data, checked, indeterminate) {
         console.log(data, checked, indeterminate);
       },
-      handleNodeClick(data) {
+      handleNodeClick(data, node) {
         console.log(data);
+        this.selectKey = node.id
+
+        // data.isSelected = 99
       },
       async loadNode(node, resolve) {
         if (node.level === 0) {
@@ -94,15 +95,18 @@
 </script>
 
 <style scoped>
-  .classify_class {
-    background-color: #17a2b8;border-color: #17a2b8;
+  .classify_class:hover {
+    /*color: red;*/
   }
+
   .classify_class_level_one {
     margin-left: 10px;
   }
+
   .classify_class_level_two {
     margin-left: 15px;
   }
+
   .custom-tree-node {
     flex: 1;
     display: flex;
@@ -112,8 +116,14 @@
     /*padding-right: 8px;*/
   }
 </style>
+
 <style>
   .el-tree-node {
-    margin: 10px;
+    margin: 5px 0;
+    /*border-top: 1px solid rgba(0,0,0,.125);*/
+  }
+
+  .el-tree-node__content:hover {
+    background-color: #66b1ff87;
   }
 </style>

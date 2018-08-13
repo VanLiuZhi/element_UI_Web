@@ -37,7 +37,11 @@
       <!--侧边栏-->
       <el-aside style="padding: 30px 0;">
         <el-card class="box-card">
-          <article-classify></article-classify>
+          <div slot="header" class="clearfix" style="text-align: left">
+            <span style="font-weight: bolder"><svg-icon icon-class="classify" style="margin: 0 5px" />分类列表</span>
+            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
+          </div>
+          <article-classify v-on:click_event="classifyHandler"></article-classify>
         </el-card>
       </el-aside>
       <!--end侧边栏-->
@@ -83,11 +87,16 @@
           importance: undefined,
           title: undefined,
           type: undefined,
-          orderby: '-date'
+          orderby: '-date',
+          classify_guid: ''
         },
       }
     },
     methods: {
+      classifyHandler(classify_guid) {
+        this.listQuery.classify_guid = classify_guid
+        this.getList()
+      },
       // 排序
       sortHandler(value) {
         this.listQuery.orderby = value
