@@ -5,12 +5,14 @@
     <header-extend></header-extend>
     <el-container style="margin-left: auto;margin-right: auto; width: 1100px">
       <el-main>
+        <el-card style="margin-bottom: 20px">
         <el-breadcrumb separator="/">
           <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-          <el-breadcrumb-item><a href="/">活动管理</a></el-breadcrumb-item>
-          <el-breadcrumb-item>活动列表</el-breadcrumb-item>
-          <el-breadcrumb-item>活动详情</el-breadcrumb-item>
+          <template v-for="item in breadcrumb">
+            <el-breadcrumb-item><span class="el-breadcrumb__inner is-link" @click="goToRoute(item.name)">{{item.name}}</span></el-breadcrumb-item>
+          </template>
         </el-breadcrumb>
+        </el-card>
         <el-card style="text-align: left;padding: 50px" class="rich_content_class" v-html="content" v-highlight>
         </el-card>
       </el-main>
@@ -35,7 +37,11 @@
           let routeData = response.data
           this.content = routeData.data.content
           this.menu = routeData.data.menu
+          this.breadcrumb = routeData.data.return_classify_parents
         })
+      },
+      goToRoute(guid) {
+        console.log(guid)
       }
     },
     created() {
@@ -43,6 +49,7 @@
       if (routeData) {
         this.content = this.$route.params.data.data.content
         this.menu = this.$route.params.data.data.menu
+        this.breadcrumb = routeData.data.return_classify_parents
       }
       else {
         this.cardClick(this.$route.params.guid)
@@ -54,6 +61,7 @@
       return {
         content: '',
         menu: '',
+        breadcrumb: []
       }
     }
   }

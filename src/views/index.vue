@@ -35,7 +35,7 @@
         </el-container>
       </el-main>
       <!--侧边栏-->
-      <el-aside style="padding: 30px 0">
+      <el-aside style="padding: 30px 0;">
         <el-card class="box-card">
           <article-classify></article-classify>
         </el-card>
