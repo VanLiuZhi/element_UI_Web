@@ -2,21 +2,21 @@
 <!--@Auther: VanLiuZhi -->
 <template>
   <div>
-    <!--<el-input placeholder="输入关键字进行过滤" v-model="filterText">-->
-    <!--</el-input>-->
-    <!--<el-tree class="filter-tree" :props="defaultProps" :filter-node-method="filterNode" ref="tree2">-->
-    <!--</el-tree>-->
+    <el-input placeholder="输入关键字进行过滤" v-model="filterText">
+    </el-input>
     <el-tree :props="props" :load="loadNode" :highlight-current=highlight_current lazy @check-change="handleCheckChange"
-             @node-click="handleNodeClick" :expand-on-click-node="false">
+             @node-click="handleNodeClick" :expand-on-click-node="false" :filter-node-method="filterNode"  ref="classify_tree">
       <div slot-scope="{ node, data }" class="custom-tree-node">
         <el-row style="width: 100%;flex-wrap: nowrap">
           <el-col :span="24" style="text-align: left">
+            <div @click="$emit('click_event', data.guid)">
             <span class="classify_class">{{ node.label }}({{ data.return_all_children_count }})
             </span>
-            <span v-on:click="$emit('click_event', data.guid)"><svg-icon :icon-class="(node.id === selectKey)?'eye_select':'eye'" /></span>
+              <span><svg-icon :icon-class="(node.id === selectKey)?'eye_select':'eye'"/></span>
+            </div>
           </el-col>
           <!--<el-col :span="4">-->
-            <!--<el-button type="success" size="mini" class="classify_class">{{ data.return_all_children_count }}</el-button>-->
+          <!--<el-button type="success" size="mini" class="classify_class">{{ data.return_all_children_count }}</el-button>-->
           <!--</el-col>-->
         </el-row>
       </div>
@@ -31,7 +31,7 @@
     name: "ArticleClassify",
     watch: {
       filterText(val) {
-        this.$refs.tree2.filter(val);
+        this.$refs.classify_tree.filter(val);
       }
     },
     data() {
@@ -41,11 +41,12 @@
           label: 'name',
           // children: 'zones',
           isLeaf: 'isLeaf',
-          key: 'guid'
+          // key: 'guid'
         },
         highlight_current: true,
         tree_data: [],
-        selectKey: ''
+        selectKey: '',
+        filterText: ''
       };
     },
     methods: {
@@ -66,15 +67,14 @@
       },
       filterNode(value, data) {
         if (!value) return true;
-        return data.label.indexOf(value) !== -1;
+        return data.name.indexOf(value) !== -1;
       },
       handleCheckChange(data, checked, indeterminate) {
         console.log(data, checked, indeterminate);
       },
       handleNodeClick(data, node) {
-        console.log(data);
+        // console.log(data);
         this.selectKey = node.id
-
         // data.isSelected = 99
       },
       async loadNode(node, resolve) {
