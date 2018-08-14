@@ -36,13 +36,14 @@
       </el-main>
       <!--侧边栏-->
       <el-aside style="padding: 30px 0;">
-        <el-card class="box-card">
+        <el-card class="box-card" style="margin-bottom: 10px">
           <div slot="header" class="clearfix" style="text-align: left">
             <span style="font-weight: bolder"><svg-icon icon-class="classify" style="margin: 0 5px" />分类列表</span>
             <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
           </div>
           <article-classify v-on:click_event="classifyHandler"></article-classify>
         </el-card>
+        <article-tag v-on:click_event="classifyHandler"></article-tag>
       </el-aside>
       <!--end侧边栏-->
     </el-container>
@@ -65,6 +66,7 @@
   import HeaderExtend from '@/component/HeaderExtend'
   import ArticleCard from '@/component/ArticleCard'
   import ArticleClassify from '@/component/ArticleClassify'
+  import ArticleTag from '@/component/ArticleTag'
   import {listArticle} from '@/api/index'
 
   // import '@/assets/css/apple_clock.css'
@@ -73,7 +75,7 @@
 
   export default {
     name: "index",
-    components: {ArticleClassify, HeaderExtend, ArticleCard},
+    components: {ArticleClassify, HeaderExtend, ArticleCard, ArticleTag},
     data() {
       return {
         richtext: '',

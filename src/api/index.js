@@ -38,3 +38,11 @@ export function getArticleClassifyForGUID(params) {
     data: params
   })
 }
+
+export function getCommonClassifyTag(params) {
+  return base({
+    url: getUrl('getCommonClassifyTag'),
+    method: 'post',
+    data: params
+  })
+}
