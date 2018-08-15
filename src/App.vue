@@ -26,9 +26,9 @@
   /*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
   ::-webkit-scrollbar
   {
-    width: 10px;
-    height: 10px;
-    background-color: #F5F5F5;
+    width: 6px;
+    height: 4px;
+    background-color: #FFF;
   }
 
   /*定义滚动条轨道 内阴影+圆角*/
@@ -36,7 +36,7 @@
   {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
     /*border-radius: 10px;*/
-    background-color: #F5F5F5;
+    background-color: #FFF;
   }
 
   /*定义滑块 内阴影+圆角*/
@@ -44,6 +44,6 @@
   {
     border-radius: 10px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #66b1ff33;
+    background-color: hsla(220,4%,58%,.3);
   }
 </style>
