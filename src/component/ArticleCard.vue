@@ -29,7 +29,8 @@
 <script>
   import {formatDate} from "../utils/dateFormat"
   import { getArticleForGUID } from '@/api/index'
-  const img_url = '/src/assets/img/default.png'
+  // const img_url = '/src/assets/img/default.png'
+  const img_url = require( '../assets/img/default.png')
   export default {
     name: "ArticleCard",
     props: ['data'],

@@ -1,7 +1,12 @@
 import base from './base'
 
 // 当前接口统一请求路径处理
-const baseApiUrl = '/api/vadmin/article_api/'
+let baseApiUrl = ''
+if (process.env.NODE_ENV === 'development') {
+  baseApiUrl = '/api/vadmin/article_api/'
+} else {
+  baseApiUrl = '/vadmin/article_api/'
+}
 
 const getUrl = function(url) {
   return baseApiUrl + url
@@ -9,7 +14,7 @@ const getUrl = function(url) {
 
 export function listArticle(params) {
   return base({
-    url: getUrl('/listArticle'),
+    url: getUrl('listArticle'),
     method: 'post',
     data: params
   })

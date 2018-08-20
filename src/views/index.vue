@@ -19,7 +19,7 @@
                 <!--</el-carousel-item>-->
               <!--</el-carousel>-->
             <!--</div>-->
-            <iframe frameborder="0" src="/src/assets/html/apple_watch.html" width="100%" height="300px" scrolling="no"></iframe>
+            <iframe frameborder="0" :src="apple_watch" width="100%" height="300px" scrolling="no"></iframe>
 
           </el-col>
         </el-row>
@@ -68,18 +68,15 @@
   import ArticleClassify from '@/component/ArticleClassify'
   import ArticleTag from '@/component/ArticleTag'
   import {listArticle} from '@/api/index'
-
-  // import '@/assets/css/apple_clock.css'
-  // import '@/assets/js/apple_clock.js'
-  const img_url = '/src/assets/img/generally.jpg'
+  const apple_watch = '/static/html/apple_watch.html'
 
   export default {
     name: "index",
     components: {ArticleClassify, HeaderExtend, ArticleCard, ArticleTag},
     data() {
       return {
+        apple_watch: apple_watch,
         richtext: '',
-        img_url: img_url,
         list: [],  // 存储首页数据
         listLoading: false,  // 首页数据加载loading触发标识
         total: null,
