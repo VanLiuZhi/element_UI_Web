@@ -126,4 +126,10 @@
   .el-tree-node__content:hover {
     background-color: #66b1ff87;
   }
+  /*.el-tree-node__content {*/
+    /*background-color: lawngreen;*/
+  /*}*/
+  .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+    background-color: lawngreen;
+  }
 </style>

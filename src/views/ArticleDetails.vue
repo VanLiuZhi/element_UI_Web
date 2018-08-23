@@ -11,6 +11,7 @@
           <template v-for="item in breadcrumb">
             <el-breadcrumb-item><span class="el-breadcrumb__inner is-link" @click="goToRoute(item.name)">{{item.name}}</span></el-breadcrumb-item>
           </template>
+          <el-breadcrumb-item :to="{ path: '/' }"></el-breadcrumb-item>
         </el-breadcrumb>
         </el-card>
         <el-card style="text-align: left;padding: 50px" class="rich_content_class" v-html="content" v-highlight>
@@ -25,7 +26,7 @@
 </template>
 
 <script>
-  import HeaderExtend from '@/component/HeaderExtend'
+  import HeaderExtend from '@/components/HeaderExtend'
   import {getArticleForGUID} from '@/api/index'
 
   export default {
@@ -68,6 +69,10 @@
 </script>
 
 <style scoped>
+  .breadcrumb_class {
+    text-decoration: none; cursor: pointer
+  }
+
   .rich_content_class /deep/ h2, .rich_content_class /deep/ h3 {
     margin: 10px 0 10px 0;
     padding: 0 10px;
@@ -126,8 +131,8 @@
   }
 
   .rich_text_class /deep/ li::before {
-    content: counter(xxx, decimal) ".";
-    counter-increment: xxx 1;
+    /*content: counter(xxx, decimal) ".";*/
+    /*counter-increment: xxx ;*/
     font-size: 1em;
     opacity: .5;
     line-height: 1.4;
@@ -154,7 +159,7 @@
     /*background: #409eff;*/
     color: #409eff;
     border-radius: 5px;
-    padding: 1.5em;
+    padding: 1.5em 0;
     margin: 2%;
     /*box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);*/
   }

@@ -63,10 +63,10 @@
 </template>
 
 <script>
-  import HeaderExtend from '@/component/HeaderExtend'
-  import ArticleCard from '@/component/ArticleCard'
-  import ArticleClassify from '@/component/ArticleClassify'
-  import ArticleTag from '@/component/ArticleTag'
+  import HeaderExtend from '@/components/HeaderExtend'
+  import ArticleCard from '@/components/ArticleCard'
+  import ArticleClassify from '@/components/ArticleClassify'
+  import ArticleTag from '@/components/ArticleTag'
   import {listArticle} from '@/api/index'
   const apple_watch = '/static/html/apple_watch.html'
 

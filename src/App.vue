@@ -11,6 +11,10 @@
 </script>
 
 <style>
+  /*.el-menu-item:focus, .el-menu-item:hover{*/
+    /*border-bottom: 2px solid #409eff;*/
+  /*}*/
+  
   #app {
     font-family: Microsoft YaHei, sans-serif;
     text-align: center;

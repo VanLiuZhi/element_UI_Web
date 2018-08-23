@@ -10,7 +10,9 @@
         </el-col>
         <el-col :span="18" style="padding: 0 10px">
           <el-col :span="24" style="text-align: left;font-size: 13px;color: #868e96;">
-            <svg-icon icon-class="classify" /><span class="span_class" style="margin-right: 10px" title="点击查看当前分类下更多文章">{{item.article_classify_name}}</span>
+            <svg-icon icon-class="classify" />
+            <span>{{item.return_article_classify_name}}</span>
+            <span class="span_class" style="margin-right: 10px" title="点击查看当前分类下更多文章">{{item.article_classify_name}}</span>
             <svg-icon className="svg_class" icon-class="date" /><span>{{item.date}}</span>
             <svg-icon className="svg_class" icon-class="eye_times" /><span>{{item.times}}</span>
           </el-col>
