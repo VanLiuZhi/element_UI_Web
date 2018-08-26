@@ -4,28 +4,36 @@
   <div>
     <header-extend></header-extend>
     <el-container class="container_class">
-      <el-main>
+      <el-main style="padding: 20px 20px 20px 0">
         <!--index上部分-->
         <el-row justify="space-between" style="padding: 10px">
           <el-col :span="24">
             <!--<div class="block" style="background-color: white">-->
-              <!--&lt;!&ndash;<span class="demonstration">默认 Hover 指示器触发</span>&ndash;&gt;-->
-              <!--<el-carousel height="330px">-->
-                <!--<el-carousel-item>-->
-                  <!--<img src="/src/assets/img/banner_1.jpg"/>-->
-                <!--</el-carousel-item>-->
-                <!--<el-carousel-item>-->
-                  <!--<img src="/src/assets/img/banner_2.jpg"/>-->
-                <!--</el-carousel-item>-->
-              <!--</el-carousel>-->
+            <!--&lt;!&ndash;<span class="demonstration">默认 Hover 指示器触发</span>&ndash;&gt;-->
+            <!--<el-carousel height="330px">-->
+            <!--<el-carousel-item>-->
+            <!--<img src="/src/assets/img/banner_1.jpg"/>-->
+            <!--</el-carousel-item>-->
+            <!--<el-carousel-item>-->
+            <!--<img src="/src/assets/img/banner_2.jpg"/>-->
+            <!--</el-carousel-item>-->
+            <!--</el-carousel>-->
             <!--</div>-->
             <iframe frameborder="0" :src="apple_watch" width="100%" height="300px" scrolling="no"></iframe>
 
           </el-col>
         </el-row>
         <el-row justify="start">
-          <el-col :span="8"><div class="sort_div_class" @click="sortHandler('-date')"><svg-icon className="svg_class" icon-class="time" /><span v-bind:class="[(listQuery.orderby === '-date') ? 'active' : '']">时间排序</span></div></el-col>
-          <el-col :span="8"><div class="sort_div_class" @click="sortHandler('-times')"><svg-icon className="svg_class" icon-class="heat2" /><span v-bind:class="[(listQuery.orderby === '-times') ? 'active' : '']">热度排序</span></div></el-col>
+          <el-col :span="8">
+            <div class="sort_div_class" @click="sortHandler('-date')">
+              <svg-icon className="svg_class" icon-class="time"/>
+              <span v-bind:class="[(listQuery.orderby === '-date') ? 'active' : '']">时间排序</span></div>
+          </el-col>
+          <el-col :span="8">
+            <div class="sort_div_class" @click="sortHandler('-times')">
+              <svg-icon className="svg_class" icon-class="heat2"/>
+              <span v-bind:class="[(listQuery.orderby === '-times') ? 'active' : '']">热度排序</span></div>
+          </el-col>
         </el-row>
         <!--index下部分-->
         <el-container>
@@ -36,13 +44,8 @@
       </el-main>
       <!--侧边栏-->
       <el-aside style="padding: 30px 0;">
-        <el-card class="box-card" style="margin-bottom: 10px">
-          <div slot="header" class="clearfix" style="text-align: left">
-            <span style="font-weight: bolder"><svg-icon icon-class="classify" style="margin: 0 5px" />分类列表</span>
-            <el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>
-          </div>
-          <article-classify v-on:click_event="classifyHandler"></article-classify>
-        </el-card>
+        <personal-space></personal-space>
+        <article-classify v-if="hackReset" :isExpandAll="isExpandAll" v-on:click_event="classifyHandler" v-on:expand_event="expandHandler"></article-classify>
         <article-tag v-on:click_event="classifyHandler"></article-tag>
       </el-aside>
       <!--end侧边栏-->
@@ -67,14 +70,18 @@
   import ArticleCard from '@/components/ArticleCard'
   import ArticleClassify from '@/components/ArticleClassify'
   import ArticleTag from '@/components/ArticleTag'
+  import PersonalSpace from '@/components/PersonalSpace'
   import {listArticle} from '@/api/index'
+
   const apple_watch = '/static/html/apple_watch.html'
 
   export default {
     name: "index",
-    components: {ArticleClassify, HeaderExtend, ArticleCard, ArticleTag},
+    components: {ArticleClassify, HeaderExtend, ArticleCard, ArticleTag, PersonalSpace},
     data() {
       return {
+        isExpandAll: false,
+        hackReset: true,
         apple_watch: apple_watch,
         richtext: '',
         list: [],  // 存储首页数据
@@ -92,6 +99,13 @@
       }
     },
     methods: {
+      expandHandler(){
+        this.hackReset = false
+        this.isExpandAll = !this.isExpandAll
+        this.$nextTick(() => {
+          this.hackReset = true
+        })
+      },
       classifyHandler(classify_guid) {
         this.listQuery.classify_guid = classify_guid
         this.getList()
@@ -138,21 +152,26 @@
     font-weight: 800;
     font-size: 15px;
   }
-  .sort_div_class:hover{
+
+  .sort_div_class:hover {
     color: red;
   }
+
   .svg_class {
     margin: 0 5px;
   }
+
   .container_class {
     margin-left: auto;
     margin-right: auto;
     width: 1100px;
   }
+
   .active {
     color: #212529;
     border-bottom: 2px solid #646464;
   }
+
   .footer_class {
     /*position: fixed;*/
     /*border: 0;*/

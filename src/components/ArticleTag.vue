@@ -9,7 +9,7 @@
       </div>
       <div style="display: flex;justify-content: flex-start;flex-wrap: wrap">
         <template v-for="item in tag_data">
-          <el-button @click="$emit('click_event', item.guid)" type="success" size="mini" icon="el-icon-star-off" style="margin: 0 0 5px 5px">{{item.name}}</el-button>
+          <el-button @click="$emit('click_event', item.guid)" type="success" size="mini" icon="el-icon-star-off" style="margin: 0 0 8px 8px" :style="{backgroundColor: item.color, borderColor: item.color}">{{item.name}}</el-button>
         </template>
       </div>
     </el-card>

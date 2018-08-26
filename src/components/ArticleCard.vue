@@ -2,7 +2,7 @@
 <!--@Auther: VanLiuZhi -->
 <template>
   <div>
-    <el-card class="box-card" style="padding: 0;margin-bottom: 10px" v-for="item in data" :key="item.id" @click.native="cardClick(item.guid)">
+    <el-card class="box-card" shadow="hover" style="padding: 0;margin-bottom: 10px" v-for="item in data" :key="item.id" @click.native="cardClick(item.guid)">
       <el-row justify="space-between">
         <el-col :span="6">
           <img style="height: 100%;width: 100%"

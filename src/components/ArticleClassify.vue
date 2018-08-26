@@ -2,25 +2,33 @@
 <!--@Auther: VanLiuZhi -->
 <template>
   <div>
-    <el-input placeholder="输入关键字进行过滤" v-model="filterText">
-    </el-input>
-    <el-tree :props="props" :load="loadNode" :highlight-current=highlight_current lazy @check-change="handleCheckChange"
-             @node-click="handleNodeClick" :expand-on-click-node="false" :filter-node-method="filterNode"  ref="classify_tree">
-      <div slot-scope="{ node, data }" class="custom-tree-node">
-        <el-row style="width: 100%;flex-wrap: nowrap">
-          <el-col :span="24" style="text-align: left">
-            <div @click="$emit('click_event', data.guid)">
+    <el-card class="box-card" style="margin-bottom: 10px">
+      <div slot="header" class="clearfix" style="text-align: left">
+        <span style="font-weight: bolder"><svg-icon icon-class="classify" style="margin: 0 5px"/>分类列表</span>
+        <el-button style="float: right; padding: 3px 0" type="text" @click="$emit('expand_event')">{{isExpandAll?'收起全部':'展开全部'}}</el-button>
+      </div>
+      <el-input placeholder="输入关键字进行过滤" v-model="filterText">
+      </el-input>
+      <el-tree node-key="guid" :default-expand-all="isExpandAll" :props="props" :load="loadNode"
+               :highlight-current=highlight_current lazy @check-change="handleCheckChange"
+               @node-click="handleNodeClick" :expand-on-click-node="false" :filter-node-method="filterNode"
+               ref="classify_tree" empty-text="正在加载ing . . .">
+        <div slot-scope="{ node, data }" class="custom-tree-node">
+          <el-row style="width: 100%;flex-wrap: nowrap">
+            <el-col :span="24" style="text-align: left">
+              <div @click="$emit('click_event', data.guid)">
             <span class="classify_class">{{ node.label }}({{ data.return_all_children_count }})
             </span>
-              <span><svg-icon :icon-class="(node.id === selectKey)?'eye_select':'eye'"/></span>
-            </div>
-          </el-col>
-          <!--<el-col :span="4">-->
-          <!--<el-button type="success" size="mini" class="classify_class">{{ data.return_all_children_count }}</el-button>-->
-          <!--</el-col>-->
-        </el-row>
-      </div>
-    </el-tree>
+                <span><svg-icon :icon-class="(node.id === selectKey)?'eye_select':'eye'"/></span>
+              </div>
+            </el-col>
+            <!--<el-col :span="4">-->
+            <!--<el-button type="success" size="mini" class="classify_class">{{ data.return_all_children_count }}</el-button>-->
+            <!--</el-col>-->
+          </el-row>
+        </div>
+      </el-tree>
+    </el-card>
   </div>
 </template>
 
@@ -34,6 +42,7 @@
         this.$refs.classify_tree.filter(val);
       }
     },
+    props: ['isExpandAll'],
     data() {
       return {
         props: {
@@ -50,6 +59,9 @@
       };
     },
     methods: {
+      expandAll() {
+
+      },
       // 通过顶级文章分类
       getInitList(node) {
         return getTopLevelArticleClassify().then(response => {
@@ -126,10 +138,11 @@
   .el-tree-node__content:hover {
     background-color: #66b1ff87;
   }
+
   /*.el-tree-node__content {*/
-    /*background-color: lawngreen;*/
+  /*background-color: lawngreen;*/
   /*}*/
-  .el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
-    background-color: lawngreen;
-  }
+  /*.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {*/
+    /*background-color: #66b1ff;*/
+  /*}*/
 </style>
