@@ -152,7 +152,7 @@
   }
 
   .rich_text_class /deep/ ol, .rich_text_class /deep/ ul {
-    /*width: 28%;*/
+    width: 100%;
     display: inline-block;
     text-align: left;
     vertical-align: top;
