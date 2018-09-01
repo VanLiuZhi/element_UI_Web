@@ -5,14 +5,16 @@
     <el-card class="box-card" style="margin-bottom: 10px">
       <div slot="header" class="clearfix" style="text-align: left">
         <span style="font-weight: bolder"><svg-icon icon-class="classify" style="margin: 0 5px"/>分类列表</span>
-        <el-button style="float: right; padding: 3px 0" type="text" @click="$emit('expand_event')">{{isExpandAll?'收起全部':'展开全部'}}</el-button>
+        <el-button style="float: right; padding: 3px 0; margin-left: 20px" type="text" @click="$emit('expand_event')">{{isExpandAll?'收起全部':'展开全部'}}</el-button>
+        <el-button style="float: right; padding: 3px 0" type="text" title="取消分类过滤，查看所有文章" @click="$emit('click_event')">查看全部</el-button>
       </div>
       <el-input placeholder="输入关键字进行过滤" v-model="filterText">
       </el-input>
-      <el-tree node-key="guid" :default-expand-all="isExpandAll" :props="props" :load="loadNode"
-               :highlight-current=highlight_current lazy @check-change="handleCheckChange"
+      <el-tree :data="tree_data" node-key="guid" :default-expand-all="isExpandAll" :props="props"
+               :highlight-current=highlight_current @check-change="handleCheckChange"
                @node-click="handleNodeClick" :expand-on-click-node="false" :filter-node-method="filterNode"
                ref="classify_tree" empty-text="正在加载ing . . .">
+        <!--:load="loadNode" lazy--> <!--懒加载节点配置-->
         <div slot-scope="{ node, data }" class="custom-tree-node">
           <el-row style="width: 100%;flex-wrap: nowrap">
             <el-col :span="24" style="text-align: left">
@@ -33,7 +35,7 @@
 </template>
 
 <script>
-  import {getTopLevelArticleClassify, getArticleClassifyForGUID} from "@/api/index"
+  import {getTopLevelArticleClassify, getArticleClassifyForGUID, getTreeArticleClassify} from "@/api/index"
 
   export default {
     name: "ArticleClassify",
@@ -48,7 +50,7 @@
         props: {
           // 组件设置了props，值指向数据，也就是这里。
           label: 'name',
-          // children: 'zones',
+          children: 'children_list',
           isLeaf: 'isLeaf',
           // key: 'guid'
         },
@@ -59,12 +61,14 @@
       };
     },
     methods: {
-      expandAll() {
-
+      getTreeData() {
+        getTreeArticleClassify().then(response => {
+          this.tree_data = response.data.data.items
+        })
       },
       // 通过顶级文章分类
       getInitList(node) {
-        return getTopLevelArticleClassify().then(response => {
+        return getTreeArticleClassify().then(response => {
           this.tree_data = response.data.data.items
           return response
         })
@@ -102,6 +106,9 @@
           }, 300);
         }
       }
+    },
+    created() {
+      this.getTreeData()
     }
   }
 </script>

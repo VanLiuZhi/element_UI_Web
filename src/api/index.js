@@ -51,3 +51,11 @@ export function getCommonClassifyTag(params) {
     data: params
   })
 }
+
+export function getTreeArticleClassify(params) {
+  return base({
+    url: getUrl('getTreeArticleClassify'),
+    method: 'post',
+    data: params
+  })
+}
