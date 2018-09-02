@@ -5,8 +5,12 @@
     <el-card class="box-card" style="margin-bottom: 10px">
       <div slot="header" class="clearfix" style="text-align: left">
         <span style="font-weight: bolder"><svg-icon icon-class="classify" style="margin: 0 5px"/>分类列表</span>
-        <el-button style="float: right; padding: 3px 0; margin-left: 20px" type="text" @click="$emit('expand_event')">{{isExpandAll?'收起全部':'展开全部'}}</el-button>
-        <el-button style="float: right; padding: 3px 0" type="text" title="取消分类过滤，查看所有文章" @click="$emit('click_event')">查看全部</el-button>
+        <el-button style="float: right; padding: 3px 0; margin-left: 20px" type="text" @click="$emit('expand_event')">
+          {{isExpandAll?'收起全部':'展开全部'}}
+        </el-button>
+        <el-button style="float: right; padding: 3px 0" type="text" title="取消分类过滤，查看所有文章" @click="$emit('click_event')">
+          查看全部
+        </el-button>
       </div>
       <el-input placeholder="输入关键字进行过滤" v-model="filterText">
       </el-input>
@@ -19,8 +23,7 @@
           <el-row style="width: 100%;flex-wrap: nowrap">
             <el-col :span="24" style="text-align: left">
               <div @click="$emit('click_event', data.guid)">
-            <span class="classify_class">{{ node.label }}({{ data.return_all_children_count }})
-            </span>
+                <span class="classify_class">{{ node.label }}({{ data.return_all_children_count }})</span>
                 <span><svg-icon :icon-class="(node.id === selectKey)?'eye_select':'eye'"/></span>
               </div>
             </el-col>
@@ -150,6 +153,6 @@
   /*background-color: lawngreen;*/
   /*}*/
   /*.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {*/
-    /*background-color: #66b1ff;*/
+  /*background-color: #66b1ff;*/
   /*}*/
 </style>

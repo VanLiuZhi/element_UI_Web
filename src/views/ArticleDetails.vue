@@ -14,7 +14,23 @@
           <el-breadcrumb-item :to="{ path: '/' }"></el-breadcrumb-item>
         </el-breadcrumb>
         </el-card>
+        <el-card>
+          <el-row>
+            <div style="font-size: 25px;color: #66b1ff;font-weight: bolder;border-bottom: 1px solid #c0c4cc;padding-bottom: 20px;margin-bottom: 10px;">{{data.title}}</div>
+          </el-row>
+          <el-row type="flex" justify="space-between" style="font-size: 10px;color: #909399;">
+            <el-col >创建时间：{{data.created}}</el-col>
+            <el-col>更新时间：{{data.updated}}</el-col>
+            <el-col>浏览次数：{{data.times}}</el-col>
+          </el-row>
+        </el-card>
         <el-card style="text-align: left;padding: 50px" class="rich_content_class" v-html="content" v-highlight>
+        </el-card>
+        <el-card>
+        <el-row justify="space-between" style="color: #909399;">
+          <el-col class="context_footer" :span="12"><span @click="cardClick(lastArticle.guid)">上一篇：{{lastArticle.title}}</span></el-col>
+          <el-col class="context_footer" :span="12"><span @click="cardClick(nextArticle.guid)">下一篇：{{nextArticle.title}}</span></el-col>
+        </el-row>
         </el-card>
       </el-main>
       <el-aside style="position: relative;">
@@ -34,11 +50,15 @@
     components: {'HeaderExtend': HeaderExtend},
     methods: {
       cardClick(guid) {
+        console.log(guid)
         getArticleForGUID({GUID: guid}).then(response => {
           let routeData = response.data
           this.content = routeData.data.content
           this.menu = routeData.data.menu
           this.breadcrumb = routeData.data.return_classify_parents
+          this.data = routeData.data
+          this.lastArticle = routeData.data.lastArticle
+          this.nextArticle = routeData.data.nextArticle
         })
       },
       goToRoute(guid) {
@@ -51,6 +71,9 @@
         this.content = this.$route.params.data.data.content
         this.menu = this.$route.params.data.data.menu
         this.breadcrumb = routeData.data.return_classify_parents
+        this.data = routeData.data
+        this.lastArticle = routeData.data.lastArticle
+        this.nextArticle = routeData.data.nextArticle
       }
       else {
         this.cardClick(this.$route.params.guid)
@@ -62,13 +85,21 @@
       return {
         content: '',
         menu: '',
-        breadcrumb: []
+        breadcrumb: [],
+        data: '',
+        lastArticle: '',
+        nextArticle: ''
       }
     }
   }
 </script>
 
 <style scoped>
+  .context_footer:hover {
+    color: orangered;
+    text-decoration: none; cursor: pointer
+  }
+
   .breadcrumb_class {
     text-decoration: none; cursor: pointer
   }
