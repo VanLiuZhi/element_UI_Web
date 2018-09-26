@@ -9,13 +9,13 @@
       </div>
       <el-row type="flex">
         <el-col :span="12" style="flex-direction: row-reverse">
-          <div>
+          <div onclick="javascript:window.open('https://segmentfault.com/u/justicelz')">
             <svg-icon style="font-size: 50px" icon-class="segmentfault" />
           </div>
           <div title="点击打开segmentfault" style="margin-top: 10px;text-decoration: none; cursor: pointer"><span onclick="javascript:window.open('https://segmentfault.com/u/justicelz')">segmentfault</span></div>
         </el-col>
         <el-col :span="12">
-          <div>
+          <div onclick="javascript:window.open('https://github.com/VanLiuZhi')">
             <svg-icon style="font-size: 50px" icon-class="github" />
           </div>
           <div title="点击打开github" style="margin-top: 10px;text-decoration: none; cursor: pointer"><span onclick="javascript:window.open('https://github.com/VanLiuZhi')">GitHub</span></div>
