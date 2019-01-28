@@ -8,9 +8,16 @@
         <!--<el-button style="float: right; padding: 3px 0" type="text">操作按钮</el-button>-->
       </div>
       <div style="display: flex;justify-content: flex-start;flex-wrap: wrap">
-        <template v-for="item in tag_data">
-          <el-button @click="$emit('click_event', item.guid)" type="success" size="mini" icon="el-icon-star-off" style="margin: 0 0 8px 8px" :style="{backgroundColor: item.color, borderColor: item.color}">{{item.name}}</el-button>
-        </template>
+        <div style="display: flex;justify-content: flex-start;flex-wrap: wrap" v-for="item in tag_data" :key="item.id">
+          <el-button
+            @click="$emit('click_event', item.guid)"
+            type="success"
+            size="mini"
+            icon="el-icon-star-off"
+            style="margin: 0 0 8px 8px"
+            :style="{backgroundColor: item.color, borderColor: item.color}"
+          >{{item.name}}</el-button>
+      </div>
       </div>
     </el-card>
   </div>

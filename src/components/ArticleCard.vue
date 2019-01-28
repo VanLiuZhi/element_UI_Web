@@ -2,7 +2,7 @@
 <!--@Auther: VanLiuZhi -->
 <template>
   <div>
-    <el-card class="box-card" shadow="hover" style="padding: 0;margin-bottom: 10px" v-for="item in data" :key="item.id" @click.native="cardClick(item.guid)">
+    <el-card class="box-card" shadow="hover" style="padding: 0;margin-bottom: 10px" v-for="item in data" :key="item.id" @click.native="cardClick(item.orig_url)">
       <el-row justify="space-between">
         <el-col :span="6">
           <img style="height: 100%;width: 100%"
@@ -11,16 +11,16 @@
         <el-col :span="18" style="padding: 0 10px">
           <el-col :span="24" style="text-align: left;font-size: 13px;color: #868e96;">
             <svg-icon icon-class="classify" />
-            <span>{{item.return_article_classify_name}}</span>
-            <span class="span_class" style="margin-right: 10px" title="点击查看当前分类下更多文章">{{item.article_classify_name}}</span>
-            <svg-icon className="svg_class" icon-class="date" /><span>{{item.date}}</span>
-            <svg-icon className="svg_class" icon-class="eye_times" /><span>{{item.times}}</span>
+            <span>{{item.tags}}</span>
+            <!-- <span class="span_class" style="margin-right: 10px" title="点击查看当前分类下更多文章">{{item.article_classify_name}}</span> -->
           </el-col>
           <el-col :span="24">
             <h3 class="span_title_class">{{item.title}}</h3>
           </el-col>
-          <el-col :span="24" style="text-align: left">
-            <p style="-webkit-box-orient: vertical;" class="abstract_c">{{item.abstract}}</p>
+          <el-col :span="24" style="text-align: left;font-size: 13px;color: #868e96;">
+            <p style="-webkit-box-orient: vertical;color: black; font-size: 15px" class="abstract_c">{{item.abstract_content}}</p>
+            <svg-icon className="svg_class" icon-class="date" /><span>{{item.created_at}}</span>
+            <svg-icon className="svg_class" icon-class="eye_times" /><span>{{item.times}}</span>
           </el-col>
         </el-col>
       </el-row>
@@ -42,16 +42,17 @@
       }
     },
     methods: {
-      cardClick(guid) {
-        getArticleForGUID({GUID:guid}).then(response => {
-          this.$router.push({
-            name: 'ArticleDetails',
-            params: {
-              guid: guid,
-              data: response.data
-            }
-          })
-        })
+      cardClick(url) {
+        // getArticleForGUID({GUID:guid}).then(response => {
+        //   this.$router.push({
+        //     name: 'ArticleDetails',
+        //     params: {
+        //       guid: guid,
+        //       data: response.data
+        //     }
+        //   })
+        // })
+        window.open(url)
       }
     }
   }

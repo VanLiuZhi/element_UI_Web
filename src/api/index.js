@@ -3,18 +3,34 @@ import base from './base'
 // 当前接口统一请求路径处理
 let baseApiUrl = ''
 if (process.env.NODE_ENV === 'development') {
-  baseApiUrl = '/api/vadmin/article_api/'
+  baseApiUrl = '/api/api/'
 } else {
-  baseApiUrl = '/vadmin/article_api/'
+  baseApiUrl = '/api/'
 }
 
 const getUrl = function(url) {
   return baseApiUrl + url
 }
 
-export function listArticle(params) {
+export function getPostList(params) {
   return base({
-    url: getUrl('listArticle'),
+    url: getUrl('post/getPostList'),
+    method: 'post',
+    data: params
+  })
+}
+
+export function searchPost(params) {
+  return base({
+    url: getUrl('post/searchPost'),
+    method: 'post',
+    data: params
+  })
+}
+
+export function getTag(params) {
+  return base({
+    url: getUrl('post/getTag'),
     method: 'post',
     data: params
   })
